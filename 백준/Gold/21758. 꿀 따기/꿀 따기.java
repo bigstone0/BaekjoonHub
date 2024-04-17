@@ -20,42 +20,31 @@ public class Main {
             honey[i] = map[i] - map[i - 1];
         }
 
-        search();
+        for (int i = 2; i < N; i++) {
+            int sum = 0;
+            sum = (map[N] - map[1]) + (map[N] - map[i]) - honey[i];
+            max = Math.max(max, sum);
+        }
+
+        for (int i = N-1; i > 1; i--) {
+            int sum = 0;
+            sum = (map[i-1]) + (map[N-1]) - honey[i];
+            max = Math.max(max, sum);
+        }
+
+        if (N != 3) search();
+        else {
+            for (int i = 1; i < 4; i++) max = Math.max(max, honey[i] * 2);
+        }
 
         System.out.println(max);
     }
 
     static void search() {
-        for (int i = 1; i < N + 1; i++) {
-            bee[i] = true;
-            for (int j = i + 1; j < N + 1; j++) {
-                if (bee[j]) continue;
-                bee[j] = true;
-                go(i, j);
-                bee[j] = false;
-            }
-            bee[i] = false;
-        }
-    }
-
-    static void go(int bee1, int bee2) {
-        for (int i = 1; i < N + 1; i++) {
+        for (int i = 2; i < N; i++) {
             int result = 0;
-            if (bee[i]) continue;
-            if (i > bee1) {
-                result += (map[i] - map[bee1]);
-            } else {
-                result += (map[bee1 - 1] - map[i - 1]);
-            }
-
-            if (i > bee2) {
-                result += (map[i] - map[bee2]);
-            } else {
-                result += (map[bee2 - 1] - map[i - 1]);
-            }
-
-            if (bee2 < i && bee2 > bee1) result -= honey[bee2];
-            else if (bee1 > i && bee1 < bee2) result -= honey[bee1];
+            result += map[i] - map[1];
+            result += map[N - 1] - map[i - 1];
             max = Math.max(max, result);
         }
     }
