@@ -13,9 +13,7 @@ bool visit[100001] = { false, };
 int num[100001];
 
 int main() {
-	std::ios_base::sync_with_stdio(false); 
-	std::cin.tie(NULL); 
-	std::cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	std::cin >> N >> R >> Q;
 	for (int i = 0; i < N - 1; i++) {
 		int A, B;
